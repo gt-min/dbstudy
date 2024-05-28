@@ -21,7 +21,11 @@
 */
 /*
   데이터타입
-  1. NUMBER(p,s)    : 숫자
+  1. NUMBER(p,s)    : 정밀도가 p이고, 스케일이 s인 숫자
+    1) 정밀도 p : 전체 유효 숫자
+    2) 스케일 s : 소수부의 유효 숫자
+    3) 스케일만 생략하면 정수로 표시하는 숫자
+    4) 정밀도와 스케일을 생략하면 정수, 실수 모두 표시할 수 있는 숫자
   2. CHAR(size)     : 고정 문자
   3. VARCHAR2(size) : 가변 문자 (최대 4000 BYTE)
   4. CLOB           : 길이가 긴 문자
@@ -30,15 +34,15 @@
 */
 /*
   제약조건
-  1. 필수여부  :  NULL / NOT NULL
+  1. 필수여부  :  NULL(디폴트) / NOT NULL
   2. 중복불가  :  UNIQUE
   3. 값의제한  :  CHECK(조건)
   4. 기본키    :  PRIMARY KEY
   5. 외래키    :  FOREIGN KEY
 */
 CREATE TABLE USER_T (
-    USER_NO   NUMBER
-  , USER_NAME VARCHAR2(100 BYTE)
+    USER_NO   NUMBER             NOT NULL UNIQUE
+  , USER_NAME VARCHAR2(100 BYTE) NULL
 );
 
 /*
