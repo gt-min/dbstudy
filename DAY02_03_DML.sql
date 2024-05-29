@@ -40,6 +40,41 @@ INSERT INTO student_t(stu_no, stu_name) VALUES(10102, '서태웅');
 INSERT INTO student_t(stu_no, stu_name) VALUES(10103, '채치수');
 COMMIT;
 
+INSERT INTO subject_t(subj_no, subj_name) VALUES(1, '국어');
+INSERT INTO subject_t(subj_no, subj_name) VALUES(2, '영어');
+INSERT INTO subject_t(subj_no, subj_name) VALUES(3, '수학');
+COMMIT;
 
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(1, 10101, 1);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(2, 10101, 2);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(3, 10101, 3);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(4, 10102, 1);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(5, 10102, 2);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(6, 10102, 3);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(7, 10103, 1);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(8, 10103, 2);
+INSERT INTO enroll_t(enr_no, stu_no, subj_no) VALUES(9, 10103, 3);
+COMMIT;
 
+/*
+  데이터 수정
+  UPDATE 테이블명 SET 열이름1=값1, 열이름2=값2, ... WHERE 조건식
+*/
 
+UPDATE student_t 
+   SET stu_name = '송태섭'  -- 등호(=)는 대입 연산자
+ WHERE stu_no = 10103;      -- 조건절의 등호(=)는 동등 비교 연산자
+COMMIT;
+
+/*
+  데이터 삭제
+  DELETE FROM 테이블명 WHERE 조건절
+*/
+
+-- STUDENT_T 부모키 먼저 삭제하기 (ON DELETE SET NULL)
+DELETE FROM student_t WHERE stu_no = 10101;
+
+-- SUBJECT_T 부모키 먼저 삭제하기 (ON DELETE CASCADE)
+DELETE FROM subject_t WHERE subj_no = 1;
+
+COMMIT;

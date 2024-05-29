@@ -81,6 +81,6 @@ CREATE TABLE subject_t (
 -- 수강신청
 CREATE TABLE enroll_t (
     enr_no NUMBER NOT NULL PRIMARY KEY
-  , stu_no NUMBER REFERENCES student_t(stu_no)
-  , subj_no NUMBER REFERENCES subject_t(subj_no)
+  , stu_no NUMBER REFERENCES student_t(stu_no) ON DELETE SET NULL
+  , subj_no NUMBER REFERENCES subject_t(subj_no) ON DELETE CASCADE
 );
