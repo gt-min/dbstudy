@@ -56,3 +56,55 @@ SELECT DISTINCT stu_no  -- DISTINCT 를 중복을 제거할 칼럼 앞에 작성
   4. 칼럼 IS NULL | 칼럼 IS NOT NULL
   5. 칼럼 LIKE 값
 */
+
+-- 1. 데이터 1개 조회하기
+SELECT stu_no
+     , stu_name
+  FROM student_t
+ WHERE stu_no = 10103;  -- 중복 없는 칼럼(PK, UNIQUE)의 동등 비교
+
+-- 2. 데이터 여러 개 조회하기
+SELECT enr_no
+     , stu_no
+     , subj_no
+  FROM enroll_t
+ WHERE stu_no = 10103;  -- 중복 없는 칼럼(PK, UNIQUE)이 사용되지 않는 경우
+
+-- 3. 사이 값 조회하기
+SELECT stu_no
+     , stu_name
+  FROM student_t
+ WHERE stu_no BETWEEN 10101 AND 10103;  -- WHERE stu_no >= 10101
+                                        --   AND stu_no <= 10103
+
+-- 4. 다중 값 조회하기
+SELECT stu_no
+     , stu_name
+  FROM student_t
+ WHERE stu_no IN(10101, 10102, 10103);  -- WHERE stu_no = 10101
+                                        --    OR stu_no = 10102
+                                        --    OR stu_no = 10103
+
+-- 5. NULL 조회하기
+SELECT enr_no
+     , stu_no
+     , subj_no
+  FROM enroll_t
+ WHERE stu_no IS NULL;
+
+-- 6. 와일드 카드를 이용해 조회하기
+/*
+  와일드 카드 (wild card)
+  1. 만능 문자를 의미한다.
+  2. 와일드 카드 연산자 : LIKE
+  3. 종류
+    1) % : 글자수에 제한이 없는 만능문자
+    2) _ : 1글자로 제한이 있는 만능문자
+  4. 대부분 와일드 카드와 값을 연결하는 문자열 연결 연산자(||)를 함께 사용한다.
+*/
+SELECT subj_no
+     , subj_name
+  FROM subject_t
+ WHERE subj_name LIKE '%' || '어' || '%';  -- 어를 포함하는 subj_name 조회
+-- WHERE subj_name LIKE '%' || '학';  -- 학으로 끝나는 subj_name 조회
+-- WHERE subj_name LIKE '영' || '%';  -- 영으로 시작하는 subj_name 조회
