@@ -30,3 +30,15 @@ SELECT *
  WHERE DEPART IN(SELECT DEPT_NO
                    FROM DEPARTMENT_T
                   WHERE LOCATION = '대구');
+
+-- 4. N번째로 입사한 사원을 조회하기
+/*
+  1) 입사일자 순으로 오름차순 정렬을 한다. (가장 먼저 입사한 사원이 1행에 나타난다.)
+  
+*/
+
+SELECT ROWNUM, emp_no, name, depart, position, gender, hire_date, salary
+  FROM (SELECT emp_no, name, depart, position, gender, hire_date, salary
+          FROM EMPLOYEE_T
+         ORDER BY hire_date ASC);
+
