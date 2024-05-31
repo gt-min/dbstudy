@@ -13,32 +13,57 @@
 
 -- 1. 사원번호가 1004인 사원의 직책을 가진 모든 사원을 조회하기
 SELECT *
-  FROM EMPLOYEE_T
- WHERE POSITION = (SELECT POSITION 
-                     FROM EMPLOYEE_T
-                    WHERE EMP_NO = 1004);
+  FROM employee_t
+ WHERE position = (SELECT position 
+                     FROM employee_t
+                    WHERE emp_no = 1004);
 
 -- 2. 모든 사원들의 평균연봉보다 높은 연봉을 받는 사원을 조회하기
 SELECT *
-  FROM EMPLOYEE_T
- WHERE SALARY > (SELECT AVG(SALARY)
-                   FROM EMPLOYEE_T);
+  FROM employee_t
+ WHERE salary > (SELECT AVG(salary)
+                   FROM employee_t);
 
 -- 3. 부서의 지역명이 '대구'인 부서에 근무하는 사원을 조회하기
 SELECT *
-  FROM EMPLOYEE_T
- WHERE DEPART IN(SELECT DEPT_NO
-                   FROM DEPARTMENT_T
-                  WHERE LOCATION = '대구');
+  FROM employee_t
+ WHERE depart IN(SELECT dept_no
+                   FROM department_t
+                  WHERE location = '대구');
 
 -- 4. N번째로 입사한 사원을 조회하기
 /*
   1) 입사일자 순으로 오름차순 정렬을 한다. (가장 먼저 입사한 사원이 1행에 나타난다.)
-  
+  2) 정렬 결과에 행 번호(ROWNUM)를 붙인다.
+    (1) ROWNUM 자체는 1을 포함한 조건만 지정이 가능하다.
+    (2) ROWNUM 의 ALIAS(별명)을 이용하면 모든 조건 지정이 가능하다.
+  3) N번째 행을 조회한다.
 */
 
-SELECT ROWNUM, emp_no, name, depart, position, gender, hire_date, salary
-  FROM (SELECT emp_no, name, depart, position, gender, hire_date, salary
-          FROM EMPLOYEE_T
-         ORDER BY hire_date ASC);
+-- 1) ROWNUM 가상 칼럼 이용하기
+SELECT emp_no, name, depart, position, gender, hire_date, salary
+  FROM (SELECT ROWNUM AS rnum, emp_no, name, depart, position, gender, hire_date, salary
+          FROM (SELECT emp_no, name, depart, position, gender, hire_date, salary
+                  FROM employee_t
+                 ORDER BY hire_date ASC))
+ WHERE rnum = 4;
 
+-- 2) ROW_NUMBER 함수 이용하기
+SELECT emp_no, name, depart, position, gender, hire_date, salary
+  FROM (SELECT ROW_NUMBER() OVER(ORDER BY hire_date ASC) AS rnum, emp_no, name, depart, position, gender, hire_date, salary
+          FROM employee_t)
+ WHERE rnum = 3;
+
+-- 5. 연봉 2~3번째 사원 조회하기
+SELECT emp_no, name, depart, position, gender, hire_date, salary
+  FROM (SELECT ROW_NUMBER() OVER(ORDER BY salary DESC) AS rnum, emp_no, name, depart, position, gender, hire_date, salary
+          FROM employee_t)
+ WHERE rnum BETWEEN 2 AND 3;
+
+-- 6. 부서번호, 부서명, 사원수를 조회하시오.
+SELECT dept_no
+     , dept_name
+     , (SELECT COUNT(*)
+          FROM employee_t e
+         WHERE d.depart = d.dept_no)
+  FROM department_t d;
