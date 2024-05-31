@@ -59,3 +59,14 @@ SELECT d.dept_no, d.dept_name, AVG(e.salary)
   FROM department_t d INNER JOIN employee_t e
     ON d.dept_no = e.depart
  GROUP BY d.dept_no, d.dept_name;
+
+-- 3. 부서별로 사원 수를 조회하시오. (부서번호, 부서명, 사원수) 사원이 없는 경우 0으로 조회하시오.
+SELECT d.dept_no, d.dept_name, COUNT(e.emp_no)
+  FROM department_t d LEFT OUTER JOIN employee_t e
+    ON d.dept_no = e.depart
+ GROUP BY d.dept_no, d.dept_name;
+
+SELECT d.dept_no, d.dept_name, COUNT(e.emp_no)
+  FROM employee_t e RIGHT OUTER JOIN department_t d
+    ON e.depart = d.dept_no
+ GROUP BY d.dept_no, d.dept_name;
