@@ -1,9 +1,9 @@
 -- 1. 다음 설명을 읽고 적절한 테이블을 생성하시오.
 -- 테이블 생성할 땐 기본키나 외래키를 별도로 설정하지 마시오.(5,6번 문제가 기본키, 외래키 설정 문제입니다.)
 
-DROP TABLE ORDER_T;
-DROP TABLE CUSTOMER_T;
-DROP TABLE BOOK_T;
+DROP TABLE order_t;
+DROP TABLE customer_t;
+DROP TABLE book_t;
 
 /*
     BOOK_T 테이블
@@ -12,11 +12,11 @@ DROP TABLE BOOK_T;
     (3) PUBLISHER : 출판사, 가변 길이 문자 (최대 50 BYTE)
     (4) PRICE     : 가격, 숫자 (최대 6자리)
 */
-CREATE TABLE BOOK_T (
-    BOOK_ID   NUMBER(11)         NOT NULL
-  , BOOK_NAME VARCHAR2(100 BYTE) NULL
-  , PUBLISHER VARCHAR2(50 BYTE)  NULL
-  , PRICE     NUMBER(6)          NULL
+CREATE TABLE book_t (
+    book_id   NUMBER(11)         NOT NULL
+  , book_name VARCHAR2(100 BYTE) NULL
+  , publisher VARCHAR2(50 BYTE)  NULL
+  , price     NUMBER(6)          NULL
 );
 
 /*
@@ -26,11 +26,11 @@ CREATE TABLE BOOK_T (
     (3) CUST_ADDR : 주소, 가변 길이 문자 (최대 50 BYTE)
     (4) CUST_TEL  : 전화, 가변 길이 문자 (최대 20 BYTE)
 */
-CREATE TABLE CUSTOMER_T (
-    CUST_ID   NUMBER(11)        NOT NULL
-  , CUST_NAME VARCHAR2(20 BYTE) NULL
-  , CUST_ADDR VARCHAR2(50 BYTE) NULL
-  , CUST_TEL  VARCHAR2(20 BYTE) NULL
+CREATE TABLE customer_t (
+    cust_id   NUMBER(11)        NOT NULL
+  , cust_name VARCHAR2(20 BYTE) NULL
+  , cust_addr VARCHAR2(50 BYTE) NULL
+  , cust_tel  VARCHAR2(20 BYTE) NULL
 );
 
 /*
@@ -41,12 +41,12 @@ CREATE TABLE CUSTOMER_T (
     (4) AMOUNT     : 판매수량, 숫자 (최대 2자리)
     (5) ORDERED_AT : 주문일, 날짜
 */
-CREATE TABLE ORDER_T (
-    ORDER_ID   VARCHAR2(20 BYTE) NOT NULL
-  , CUST_ID    NUMBER(11)        NULL
-  , BOOK_ID    NUMBER(11)        NULL
-  , AMOUNT     NUMBER(2)         NULL
-  , ORDERED_AT DATE              NULL
+CREATE TABLE order_t (
+    order_id   VARCHAR2(20 BYTE) NOT NULL
+  , cust_id    NUMBER(11)        NULL
+  , book_id    NUMBER(11)        NULL
+  , amount     NUMBER(2)         NULL
+  , ordered_at DATE              NULL
 );
 
 
@@ -65,18 +65,18 @@ CREATE TABLE ORDER_T (
     9       올림픽 이야기    삼성당      7500
     10      올림픽 챔피언    나이스북    13000
 */
-DROP SEQUENCE BOOK_SEQ;
-CREATE SEQUENCE BOOK_SEQ NOCACHE;
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '축구의 역사', '굿스포츠', 7000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '축구 아는 여자', '나이스북', 13000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '축구의 이해', '대한미디어', 22000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '골프 바이블', '대한미디어', 35000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '피겨 교본', '굿스포츠', 6000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '역도 단계별 기술', '굿스포츠', 6000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '야구의 추억', '이상미디어', 20000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '야구를 부탁해', '이상미디어', 13000);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '올림픽 이야기', '삼성당', 7500);
-INSERT INTO BOOK_T(BOOK_ID, BOOK_NAME, PUBLISHER, PRICE) VALUES (BOOK_SEQ.NEXTVAL, '올림픽 챔피언', '나이스북', 13000);
+DROP SEQUENCE book_seq;
+CREATE SEQUENCE book_seq NOCACHE;
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '축구의 역사', '굿스포츠', 7000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '축구 아는 여자', '나이스북', 13000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '축구의 이해', '대한미디어', 22000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '골프 바이블', '대한미디어', 35000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '피겨 교본', '굿스포츠', 6000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '역도 단계별 기술', '굿스포츠', 6000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '야구의 추억', '이상미디어', 20000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '야구를 부탁해', '이상미디어', 13000);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '올림픽 이야기', '삼성당', 7500);
+INSERT INTO book_t(book_id, book_name, publisher, price) VALUES (book_seq.NEXTVAL, '올림픽 챔피언', '나이스북', 13000);
 COMMIT;
 
 
@@ -90,15 +90,15 @@ COMMIT;
     1003     추신수   미국      333-333-333
     1004     박세리   대한민국  NULL
 */
-DROP SEQUENCE CUST_SEQ;
-CREATE SEQUENCE CUST_SEQ
+DROP SEQUENCE cust_seq;
+CREATE SEQUENCE cust_seq
     START WITH 1000
     NOCACHE;
-INSERT INTO CUSTOMER_T(CUST_ID, CUST_NAME, CUST_ADDR, CUST_TEL) VALUES (CUST_SEQ.NEXTVAL, '박지성', '영국', '000-000-000');
-INSERT INTO CUSTOMER_T(CUST_ID, CUST_NAME, CUST_ADDR, CUST_TEL) VALUES (CUST_SEQ.NEXTVAL, '김연아', '대한민국', '111-111-111');
-INSERT INTO CUSTOMER_T(CUST_ID, CUST_NAME, CUST_ADDR, CUST_TEL) VALUES (CUST_SEQ.NEXTVAL, '장미란', '대한민국', '222-222-222');
-INSERT INTO CUSTOMER_T(CUST_ID, CUST_NAME, CUST_ADDR, CUST_TEL) VALUES (CUST_SEQ.NEXTVAL, '추신수', '미국', '333-333-333');
-INSERT INTO CUSTOMER_T(CUST_ID, CUST_NAME, CUST_ADDR, CUST_TEL) VALUES (CUST_SEQ.NEXTVAL, '박세리', '대한민국', NULL);
+INSERT INTO customer_t(cust_id, cust_name, cust_addr, cust_tel) VALUES (cust_seq.NEXTVAL, '박지성', '영국', '000-000-000');
+INSERT INTO customer_t(cust_id, cust_name, cust_addr, cust_tel) VALUES (cust_seq.NEXTVAL, '김연아', '대한민국', '111-111-111');
+INSERT INTO customer_t(cust_id, cust_name, cust_addr, cust_tel) VALUES (cust_seq.NEXTVAL, '장미란', '대한민국', '222-222-222');
+INSERT INTO customer_t(cust_id, cust_name, cust_addr, cust_tel) VALUES (cust_seq.NEXTVAL, '추신수', '미국', '333-333-333');
+INSERT INTO customer_t(cust_id, cust_name, cust_addr, cust_tel) VALUES (cust_seq.NEXTVAL, '박세리', '대한민국', NULL);
 COMMIT;
 
 
@@ -120,36 +120,36 @@ COMMIT;
     200709-9   1001      10      1        20/07/09
     200710-10  1002      6       4        20/07/10
 */
-DROP SEQUENCE ORDER_SEQ;
-CREATE SEQUENCE ORDER_SEQ
+DROP SEQUENCE order_seq;
+CREATE SEQUENCE order_seq
     NOCACHE;
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1000, 1, 1, TO_DATE('20/07/01'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1000, 3, 2, TO_DATE('20/07/03'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1001, 5, 1, TO_DATE('20/07/03'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1002, 6, 2, TO_DATE('20/07/04'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1003, 7, 3, TO_DATE('20/07/05'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1000, 2, 5, TO_DATE('20/07/07'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1003, 8, 2, TO_DATE('20/07/07'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1002, 10, 2, TO_DATE('20/07/08'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1001, 10, 1, TO_DATE('20/07/09'));
-INSERT INTO ORDER_T(ORDER_ID, CUST_ID, BOOK_ID, AMOUNT, ORDERED_AT) VALUES (ORDER_SEQ.NEXTVAL, 1002, 6, 4, TO_DATE('20/07/10'));
-UPDATE ORDER_T
-   SET ORDER_ID = CONCAT(TO_CHAR(ORDERED_AT, 'YYMMDD-'), ORDER_ID);
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1000, 1, 1, TO_DATE('20/07/01'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1000, 3, 2, TO_DATE('20/07/03'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1001, 5, 1, TO_DATE('20/07/03'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1002, 6, 2, TO_DATE('20/07/04'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1003, 7, 3, TO_DATE('20/07/05'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1000, 2, 5, TO_DATE('20/07/07'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1003, 8, 2, TO_DATE('20/07/07'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1002, 10, 2, TO_DATE('20/07/08'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1001, 10, 1, TO_DATE('20/07/09'));
+INSERT INTO order_t(order_id, cust_id, book_id, amount, ordered_at) VALUES (order_seq.NEXTVAL, 1002, 6, 4, TO_DATE('20/07/10'));
+UPDATE order_t
+   SET order_id = CONCAT(TO_CHAR(ordered_at, 'YYMMDD-'), order_id);
 COMMIT;
 
 
 -- 5. BOOK_T, CUSTOMER_T, ORDER_T 테이블의 BOOK_ID, CUST_ID, ORDER_ID 칼럼에 기본키를 추가하시오.
 -- 기본키 제약조건의 이름은 PK_BOOK, PK_CUSTOMER, PK_ORDER으로 지정하시오.
-ALTER TABLE BOOK_T ADD CONSTRAINT PK_BOOK PRIMARY KEY(BOOK_ID);
-ALTER TABLE CUSTOMER_T ADD CONSTRAINT PK_CUSTOMER PRIMARY KEY(CUST_ID);
-ALTER TABLE ORDER_T ADD CONSTRAINT PK_ORDER PRIMARY KEY(ORDER_ID);
+ALTER TABLE book_t ADD CONSTRAINT pk_book PRIMARY KEY(book_id);
+ALTER TABLE customer_t ADD CONSTRAINT pk_customer PRIMARY KEY(cust_id);
+ALTER TABLE order_t ADD CONSTRAINT pk_order PRIMARY KEY(order_id);
 
 
 -- 6. ORDER_T 테이블의 CUST_ID, BOOK_ID 칼럼에 각각 CUSTOMER_T 테이블과 BOOK_T 테이블을 참조할 외래키를 추가하시오.
 -- 외래키 제약조건의 이름은 FK_CUSTOMER_ORDER, FK_BOOK_ORDER으로 지정하시오.
 -- CUST_ID나 BOOK_ID가 삭제되는 경우 이를 참조하는 ORDER_T 테이블의 정보는 NULL로 처리하시오.
-ALTER TABLE ORDER_T ADD CONSTRAINT FK_CUSTOMER_ORDER FOREIGN KEY(CUST_ID) REFERENCES CUSTOMER_T(CUST_ID) ON DELETE SET NULL;
-ALTER TABLE ORDER_T ADD CONSTRAINT FK_BOOK_ORDER FOREIGN KEY(BOOK_ID) REFERENCES BOOK_T(BOOK_ID) ON DELETE SET NULL;
+ALTER TABLE order_t ADD CONSTRAINT fk_customer_order FOREIGN KEY(cust_id) REFERENCES customer_t(cust_id) ON DELETE SET NULL;
+ALTER TABLE order_t ADD CONSTRAINT fk_book_order FOREIGN KEY(book_id) REFERENCES book_t(book_id) ON DELETE SET NULL;
 
 
 -- 7. 책이름에 '올림픽'이 포함된 책 정보를 조회하시오.
@@ -157,20 +157,20 @@ ALTER TABLE ORDER_T ADD CONSTRAINT FK_BOOK_ORDER FOREIGN KEY(BOOK_ID) REFERENCES
 -- 올림픽으로 끝   : '%올림픽'
 -- 올림픽을 포함   : '%올림픽%'
 SELECT *
-  FROM BOOK_T
- WHERE BOOK_NAME LIKE '%' || '올림픽' || '%';
+  FROM book_t
+ WHERE book_name LIKE '%' || '올림픽' || '%';
 
 
 -- 8. 가격이 가장 비싼 책을 조회하시오.
 SELECT *
-  FROM BOOK_T
- WHERE PRICE = (SELECT MAX(PRICE)
-                  FROM BOOK_T);
+  FROM book_t
+ WHERE price = (SELECT MAX(price)
+                  FROM book_t);
 
 SELECT *
-  FROM (SELECT RANK() OVER(ORDER BY PRICE DESC) AS RK, BOOK_ID, BOOK_NAME, PUBLISHER, PRICE
-          FROM BOOK_T)
- WHERE RK = 1;
+  FROM (SELECT RANK() OVER(ORDER BY price DESC) AS rk, book_id, book_name, publisher, price
+          FROM book_t)
+ WHERE rk = 1;
 
 
 -- 9. '20/07/05'부터 '20/07/09' 사이에 주문된 도서 정보를 조회하시오.
@@ -180,27 +180,27 @@ SELECT *
 -- 230707-7 8      야구를 부탁해
 -- 230708-8 10     올림픽 챔피언
 -- 230709-9 10     올림픽 챔피언
-SELECT O.ORDER_ID AS 주문번호
-     , B.BOOK_ID AS 책번호
-     , B.BOOK_NAME AS 책이름
-  FROM BOOK_T B INNER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID
- WHERE O.ORDERED_AT BETWEEN TO_DATE('20/07/05') AND TO_DATE('20/07/09')
- ORDER BY O.ORDERED_AT ASC;
+SELECT O.order_id AS 주문번호
+     , B.book_id AS 책번호
+     , B.book_name AS 책이름
+  FROM book_t B INNER JOIN order_t O
+    ON B.book_id = O.book_id
+ WHERE O.ordered_at BETWEEN TO_DATE('20/07/05') AND TO_DATE('20/07/09')
+ ORDER BY O.ordered_at ASC;
 
 
 -- 10. 주문한 이력이 없는 고객의 이름을 조회하시오.
 -- 고객명
 -- 박세리
-SELECT CUST_NAME AS 고객명
-  FROM CUSTOMER_T
- WHERE CUST_ID NOT IN(SELECT CUST_ID
-                        FROM ORDER_T);
+SELECT cust_name AS 고객명
+  FROM customer_t
+ WHERE cust_id NOT IN(SELECT cust_id
+                        FROM order_t);
 
-SELECT C.CUST_NAME AS 고객명
-  FROM CUSTOMER_T C LEFT OUTER JOIN ORDER_T O
-    ON C.CUST_ID = O.CUST_ID
- WHERE O.ORDER_ID IS NULL;
+SELECT C.cust_name AS 고객명
+  FROM customer_t C LEFT OUTER JOIN order_t O
+    ON C.cust_id = O.cust_id
+ WHERE O.order_id IS NULL;
 
 
 -- 11. '20/07/04'부터 '20/07/07' 사이에 주문 받은 도서를 제외하고 나머지 모든 주문 정보를 조회하시오.
@@ -211,65 +211,65 @@ SELECT C.CUST_NAME AS 고객명
 -- 230710-10 장미란  역도 단계별 기술 24000    20/07/10
 -- 230709-9  김연아  올림픽 챔피언    13000    20/07/09
 -- 230708-8  장미란  올림픽 챔피언    26000    20/07/08
-SELECT O.ORDER_ID  AS 구매번호
-     , C.CUST_NAME AS 구매자
-     , B.BOOK_NAME AS 책이름
-     , B.PRICE * O.AMOUNT AS 총구매액
-     , O.ORDERED_AT AS 주문일자
-  FROM BOOK_T B INNER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID INNER JOIN CUSTOMER_T C
-    ON C.CUST_ID = O.CUST_ID
- WHERE O.ORDERED_AT NOT BETWEEN TO_DATE('20/07/04') AND TO_DATE('20/07/07');
+SELECT O.order_id  AS 구매번호
+     , C.cust_name AS 구매자
+     , B.book_name AS 책이름
+     , B.price * O.amount AS 총구매액
+     , O.ordered_at AS 주문일자
+  FROM book_t B INNER JOIN order_t O
+    ON B.book_id = O.book_id INNER JOIN customer_t C
+    ON C.cust_id = O.cust_id
+ WHERE O.ordered_at NOT BETWEEN TO_DATE('20/07/04') AND TO_DATE('20/07/07');
 
 
 -- 12. 가장 최근에 구매한 고객의 이름, 책이름, 주문일자를 조회하시오.
 -- 고객명  책이름            주문일자
 -- 장미란  역도 단계별 기술  20/07/10
-SELECT C.CUST_NAME AS 고객명
-     , B.BOOK_NAME AS 책이름
-     , O.ORDERED_AT AS 주문일자
-  FROM BOOK_T B INNER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID INNER JOIN CUSTOMER_T C
-    ON C.CUST_ID = O.CUST_ID
- WHERE O.ORDERED_AT = (SELECT MAX(ORDERED_AT)
-                       FROM ORDER_T);
+SELECT C.cust_name AS 고객명
+     , B.book_name AS 책이름
+     , O.ordered_at AS 주문일자
+  FROM book_t B INNER JOIN order_t O
+    ON B.book_id = O.book_id INNER JOIN customer_t C
+    ON C.cust_id = O.cust_id
+ WHERE O.ordered_at = (SELECT MAX(ordered_at)
+                       FROM order_t);
 
 
 -- 13. 주문된 적이 없는 책의 주문번호, 책번호, 책이름을 조회하시오.
 -- 주문번호 책번호 책이름
 -- NULL     4      골프 바이블
 -- NULL     9      올림픽 이야기
-SELECT O.ORDER_ID AS 주문번호
-     , B.BOOK_ID AS 책번호
-     , B.BOOK_NAME AS 책이름
-  FROM BOOK_T B LEFT OUTER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID
- WHERE O.ORDER_ID IS NULL;
+SELECT O.order_id AS 주문번호
+     , B.book_id AS 책번호
+     , B.book_name AS 책이름
+  FROM book_t B LEFT OUTER JOIN order_t O
+    ON B.book_id = O.book_id
+ WHERE O.order_id IS NULL;
 
 
 -- 14. 모든 서적 중에서 가장 비싼 서적을 구매한 고객이름, 책이름, 가격을 조회하시오.
 -- 가장 비싼 서적을 구매한 고객이 없다면 고객 이름은 NULL로 처리하시오.
 -- 고객명  책이름       책가격
 -- NULL    골프 바이블  35000
-SELECT C.CUST_NAME AS 고객명
-     , B.BOOK_NAME AS 책이름
-     , B.PRICE AS 책가격
-  FROM BOOK_T B LEFT OUTER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID LEFT OUTER JOIN CUSTOMER_T C
-    ON C.CUST_ID = O.CUST_ID
- WHERE B.PRICE = (SELECT MAX(PRICE)
-                    FROM BOOK_T);
+SELECT C.cust_name AS 고객명
+     , B.book_name AS 책이름
+     , B.price AS 책가격
+  FROM book_t B LEFT OUTER JOIN order_t O
+    ON B.book_id = O.book_id LEFT OUTER JOIN customer_t C
+    ON C.cust_id = O.cust_id
+ WHERE B.price = (SELECT MAX(price)
+                    FROM book_t);
 
 
 -- 15. '김연아'가 구매한 도서수를 조회하시오.
 -- 고객명  구매도서수
 -- 김연아  2
-SELECT C.CUST_NAME AS 고객명
-     , COUNT(O.ORDER_ID) AS 구매도서수  -- 주문을 몇 번 했는가?
-  FROM CUSTOMER_T C INNER JOIN ORDER_T O
-    ON C.CUST_ID = O.CUST_ID
- WHERE C.CUST_NAME = '김연아'
- GROUP BY C.CUST_ID, C.CUST_NAME;
+SELECT C.cust_name AS 고객명
+     , COUNT(O.order_id) AS 구매도서수  -- 주문을 몇 번 했는가?
+  FROM customer_t C INNER JOIN order_t O
+    ON C.cust_id = O.cust_id
+ WHERE C.cust_name = '김연아'
+ GROUP BY C.cust_id, C.cust_name;
 
 
 -- 16. 출판사별로 판매된 책의 갯수를 조회하시오.
@@ -279,23 +279,23 @@ SELECT C.CUST_NAME AS 고객명
 -- 나이스북   3
 -- 대한미디어 1
 -- 이상미디어 2
-SELECT B.PUBLISHER AS 출판사
-     , COUNT(O.ORDER_ID) AS 판매된책수
-  FROM BOOK_T B LEFT OUTER JOIN ORDER_T O
-    ON B.BOOK_ID = O.BOOK_ID
- GROUP BY B.PUBLISHER;
+SELECT B.publisher AS 출판사
+     , COUNT(O.order_id) AS 판매된책수
+  FROM book_t B LEFT OUTER JOIN order_t O
+    ON B.book_id = O.book_id
+ GROUP BY B.publisher;
 
 
 -- 17. '박지성'이 구매한 도서를 발간한 출판사(PUBLISHER) 개수를 조회하시오.
 -- 고객명  출판사수
 -- 박지성  3
-SELECT C.CUST_NAME AS 고객명
-     , COUNT(DISTINCT B.PUBLISHER) AS 출판사
-  FROM CUSTOMER_T C INNER JOIN ORDER_T O
-    ON C.CUST_ID = O.CUST_ID INNER JOIN BOOK_T B
-    ON B.BOOK_ID = O.BOOK_ID
- WHERE C.CUST_NAME = '박지성'
- GROUP BY C.CUST_ID, C.CUST_NAME;
+SELECT C.cust_name AS 고객명
+     , COUNT(DISTINCT B.publisher) AS 출판사
+  FROM customer_t C INNER JOIN order_t O
+    ON C.cust_id = O.cust_id INNER JOIN book_t B
+    ON B.book_id = O.book_id
+ WHERE C.cust_name = '박지성'
+ GROUP BY C.cust_id, C.cust_name;
 
 
 -- 18. 모든 구매 고객의 이름과 총구매액(PRICE * AMOUNT)을 조회하시오. 구매 이력이 있는 고객만 조회하시오.
@@ -304,12 +304,12 @@ SELECT C.CUST_NAME AS 고객명
 -- 김연아  19000
 -- 장미란  62000
 -- 추신수  86000
-SELECT C.CUST_NAME AS 고객명
-     , SUM(B.PRICE * O.AMOUNT) AS 구매액
-  FROM CUSTOMER_T C INNER JOIN ORDER_T O
-    ON C.CUST_ID = O.CUST_ID INNER JOIN BOOK_T B
-    ON B.BOOK_ID = O.BOOK_ID
- GROUP BY C.CUST_ID, C.CUST_NAME;
+SELECT C.cust_name AS 고객명
+     , SUM(B.price * O.amount) AS 구매액
+  FROM customer_t C INNER JOIN order_t O
+    ON C.cust_id = O.cust_id INNER JOIN book_t B
+    ON B.book_id = O.book_id
+ GROUP BY C.cust_id, C.cust_name;
 
 
 -- 19. 모든 구매 고객의 이름과 총구매액(PRICE * AMOUNT)과 구매횟수를 조회하시오. 구매 이력이 없는 고객은 총구매액과 구매횟수를 0으로 조회하고, 고객번호 오름차순으로 정렬하시오.
@@ -319,27 +319,27 @@ SELECT C.CUST_NAME AS 고객명
 -- 장미란  62000      3
 -- 추신수  86000      2
 -- 박세리  0          0
-SELECT C.CUST_NAME AS 고객명
-     , NVL(SUM(B.PRICE * O.AMOUNT), 0) AS 총구매액
-     , COUNT(O.ORDER_ID) AS 구매횟수
-  FROM CUSTOMER_T C LEFT OUTER JOIN ORDER_T O
-    ON C.CUST_ID = O.CUST_ID LEFT OUTER JOIN BOOK_T B
-    ON B.BOOK_ID = O.BOOK_ID
- GROUP BY C.CUST_ID, C.CUST_NAME
- ORDER BY C.CUST_ID ASC;
+SELECT C.cust_name AS 고객명
+     , NVL(SUM(B.price * O.amount), 0) AS 총구매액  -- NVL(SUM(B.price * O.amount), 0) : SUM(B.price * O.amount) 결과가 NULL 이면 0을 반환
+     , COUNT(O.order_id) AS 구매횟수
+  FROM customer_t C LEFT OUTER JOIN order_t O
+    ON C.cust_id = O.cust_id LEFT OUTER JOIN book_t B
+    ON B.book_id = O.book_id
+ GROUP BY C.cust_id, C.cust_name
+ ORDER BY C.cust_id ASC;
 
 
 -- 20. 총구매액이 2~3위인 고객의 이름와 총구매액을 조회하시오.
 -- 고객명  총구매액
 -- 추신수  86000
 -- 장미란  62000
-SELECT A.CUST_NAME AS 고객명
-     , A.TOTAL AS 총구매액
-  FROM (SELECT RANK() OVER(ORDER BY SUM(B.PRICE * O.AMOUNT) DESC) AS RK
-             , C.CUST_NAME
-             , SUM(B.PRICE * O.AMOUNT) AS TOTAL
-          FROM CUSTOMER_T C INNER JOIN ORDER_T O
-            ON C.CUST_ID = O.CUST_ID INNER JOIN BOOK_T B
-            ON B.BOOK_ID = O.BOOK_ID
-         GROUP BY C.CUST_ID, C.CUST_NAME) A
- WHERE A.RK BETWEEN 2 AND 3;
+SELECT A.cust_name AS 고객명
+     , A.total AS 총구매액
+  FROM (SELECT RANK() OVER(ORDER BY SUM(B.price * O.amount) DESC) AS rk
+             , C.cust_name
+             , SUM(B.price * O.amount) AS total
+          FROM customer_t C INNER JOIN order_t O
+            ON C.cust_id = O.cust_id INNER JOIN book_t B
+            ON B.book_id = O.book_id
+         GROUP BY C.cust_id, C.cust_name) A
+ WHERE A.rk BETWEEN 2 AND 3;
